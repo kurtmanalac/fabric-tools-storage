@@ -65,7 +65,7 @@ app.post('/invoke-script', async (req, res ) => {
     if (!shellScript){
         return res.status(400).json({ error: 'Missing shellScript'});
     }
-    exec("./" + shellScript, {
+    exec("/app/node-api/" + shellScript, {
         env: {
             ...process.env,
             ...(envVar || {}) 
