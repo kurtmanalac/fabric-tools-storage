@@ -1,6 +1,6 @@
 FROM hyperledger/fabric-tools:2.5
 USER root
-RUN apt-get update && apt-get install -y nodejs npm curl jq unzip
+RUN apt-get update && apt-get install -y curl jq unzip
 
 RUN mkdir -p /app/data
 
