@@ -9,7 +9,7 @@ RUN chmod +x /app/node-api
 RUN chmod +x /app/node-api/app.js
 RUN chmod +x /app/node-api/transfer-file.sh
 RUN chmod +x /app/node-api/clean-zip.sh
-WORKDIR /app/node-api
-RUN npm install --production
+COPY install-files.sh /app/install-files.sh
+RUN chmod +x /app/install-files.sh
 
-CMD [ "node", "app.js" ]
+CMD [ "/app/install-files.sh" ]
