@@ -11,4 +11,4 @@ COPY node-api /app/node-api
 RUN chmod +x /app/node-api
 RUN chmod +x /app/node-api/transfer-file.sh
 
-CMD ["sleep", "infinity"]
+CMD ["node", "node-api/app.js"]
