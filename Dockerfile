@@ -10,5 +10,6 @@ RUN mkdir -p /app/data
 COPY node-api /app/node-api
 RUN chmod +x /app/node-api
 RUN chmod +x /app/node-api/transfer-file.sh
+RUN chmod +x /app/node-api/clean-zip.sh
 
-CMD ["node", "node-api/app.js"]
+CMD [ "node", "/app/node-api/app.js" ]
