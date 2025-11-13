@@ -6,7 +6,7 @@ apt install -y nodejs &
 INSTALL_PID=$!
 wait $INSTALL_PID
 
-npm install --prefix ./node-api --production &
+npm install --prefix /app/node-api --production &
 NPM_PID=$!
 wait $NPM_PID
 
