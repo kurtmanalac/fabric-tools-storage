@@ -12,4 +12,4 @@ RUN chmod +x /app/node-api/clean-zip.sh
 WORKDIR /app/node-api
 RUN npm install
 
-CMD [ "node", "/app/node-api/app.js" ]
+CMD [ "node", "app.js" ]
