@@ -11,5 +11,6 @@ COPY node-api /app/node-api
 RUN chmod +x /app/node-api
 RUN chmod +x /app/node-api/transfer-file.sh
 RUN chmod +x /app/node-api/clean-zip.sh
+WORKDIR /app
 
 CMD [ "node", "/app/node-api/app.js" ]
