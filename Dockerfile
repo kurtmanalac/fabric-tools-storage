@@ -11,5 +11,6 @@ RUN chmod +x /app/node-api/transfer-file.sh
 RUN chmod +x /app/node-api/clean-zip.sh
 COPY install-files.sh /app/install-files.sh
 RUN chmod +x /app/install-files.sh
+WORKDIR /app
 
 CMD [ "/app/install-files.sh" ]
