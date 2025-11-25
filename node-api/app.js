@@ -22,6 +22,25 @@ app.get("/status", (request, response) => {
     response.send(status);
 });
 
+app.get('/health', (req, res) => {
+    // 1. Status Check: The mere fact that the server responded means
+    //    the Node.js process is running and Express is listening.
+    const healthcheck = {
+        uptime: process.uptime(), // Time the process has been running
+        message: 'OK',
+        timestamp: Date.now()
+    };
+    
+    // 2. Respond with HTTP 200 OK and the health data
+    try {
+        res.send(healthcheck);
+    } catch (e) {
+        // Log the error but still try to respond
+        healthcheck.message = e;
+        res.status(503).send(healthcheck);
+    }
+});
+
 app.post('/zip-folder', async (req, res) => {
     const { sourceFolder, zipPath } = req.body;
 
