@@ -271,7 +271,7 @@ Profiles:
           - Host: fabric-orderer.railway.internal
             Port: 7050
             #ADJUST FOR OWN CERT FILE
-            ClientTLSCert: /app/data/fabric-ca-client/ord1/tls/tlscacerts/tls-github-fabric-ca-railway-internal-7054.pem
+            ClientTLSCert: /app/data/fabric-ca-client/ord1/tls/signcerts/cert.pem
             ServerTLSCert: /app/data/fabric-ca-client/ord1/tls/tlscacerts/tls-github-fabric-ca-railway-internal-7054.pem
       Organizations:
         - *Ord1
