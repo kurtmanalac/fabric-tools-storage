@@ -13,77 +13,81 @@
 #
 ################################################################################
 Organizations:
-  - &OrdererOrg
+  - &Ord1
     # SampleOrg defines an MSP using the sampleconfig.  It should never be used
     # in production but may be used as a template for other definitions
     # DefaultOrg defines the organization which is used in the sampleconfig
     # of the fabric.git development environment
-    Name: OrdererOrg
+    Name: Ord1
     # ID to load the MSP definition as
-    ID: OrdererMSP
+    ID: Ord1
     # MSPDir is the filesystem path which contains the MSP configuration
-    MSPDir: ../organizations/ordererOrganizations/example.com/msp
+    MSPDir: /app/data/fabric-ca-client/ord1/msp
     # Policies defines the set of policies at this level of the config tree
     # For organization policies, their canonical path is usually
     #   /Channel/<Application|Orderer>/<OrgName>/<PolicyName>
     Policies:
       Readers:
         Type: Signature
-        Rule: "OR('OrdererMSP.member')"
+        Rule: "OR('Ord1.client', 'Ord1.admin', 'Ord1.peer')"
       Writers:
         Type: Signature
-        Rule: "OR('OrdererMSP.member')"
+        Rule: "OR('Ord1.client', 'Ord1.admin')"
       Admins:
         Type: Signature
-        Rule: "OR('OrdererMSP.admin')"
+        Rule: "OR('Ord1.admin')"
+      Endorsement:
+        Type: Signature
+        Rule: "OR('Ord1.peer')"
     OrdererEndpoints:
-      - orderer.example.com:7050
-  - &Org1
+      - fabric-orderer.railway.internal:7050
+      - fabric-peer.railway.internal:7051
+  - &upmoPeer1
     # DefaultOrg defines the organization which is used in the sampleconfig
     # of the fabric.git development environment
-    Name: Org1MSP
+    Name: upmoPeer1
     # ID to load the MSP definition as
-    ID: Org1MSP
-    MSPDir: ../organizations/peerOrganizations/org1.example.com/msp
+    ID: upmoPeer1
+    MSPDir: /app/data/fabric-ca-client/peer1/msp
     # Policies defines the set of policies at this level of the config tree
     # For organization policies, their canonical path is usually
     #   /Channel/<Application|Orderer>/<OrgName>/<PolicyName>
     Policies:
       Readers:
         Type: Signature
-        Rule: "OR('Org1MSP.admin', 'Org1MSP.peer', 'Org1MSP.client')"
+        Rule: "OR('upmoPeer1.admin', 'upmoPeer1.peer', 'upmoPeer1.client')"
       Writers:
         Type: Signature
-        Rule: "OR('Org1MSP.admin', 'Org1MSP.client')"
+        Rule: "OR('upmoPeer1.admin', 'upmoPeer1.client')"
       Admins:
         Type: Signature
-        Rule: "OR('Org1MSP.admin')"
+        Rule: "OR('upmoPeer1.admin')"
       Endorsement:
         Type: Signature
-        Rule: "OR('Org1MSP.peer')"
-  - &Org2
-    # DefaultOrg defines the organization which is used in the sampleconfig
-    # of the fabric.git development environment
-    Name: Org2MSP
-    # ID to load the MSP definition as
-    ID: Org2MSP
-    MSPDir: ../organizations/peerOrganizations/org2.example.com/msp
-    # Policies defines the set of policies at this level of the config tree
-    # For organization policies, their canonical path is usually
-    #   /Channel/<Application|Orderer>/<OrgName>/<PolicyName>
-    Policies:
-      Readers:
-        Type: Signature
-        Rule: "OR('Org2MSP.admin', 'Org2MSP.peer', 'Org2MSP.client')"
-      Writers:
-        Type: Signature
-        Rule: "OR('Org2MSP.admin', 'Org2MSP.client')"
-      Admins:
-        Type: Signature
-        Rule: "OR('Org2MSP.admin')"
-      Endorsement:
-        Type: Signature
-        Rule: "OR('Org2MSP.peer')"
+        Rule: "OR('upmoPeer1.peer')"
+  # - &Org2
+  #   # DefaultOrg defines the organization which is used in the sampleconfig
+  #   # of the fabric.git development environment
+  #   Name: Org2MSP
+  #   # ID to load the MSP definition as
+  #   ID: Org2MSP
+  #   MSPDir: ../organizations/peerOrganizations/org2.example.com/msp
+  #   # Policies defines the set of policies at this level of the config tree
+  #   # For organization policies, their canonical path is usually
+  #   #   /Channel/<Application|Orderer>/<OrgName>/<PolicyName>
+  #   Policies:
+  #     Readers:
+  #       Type: Signature
+  #       Rule: "OR('Org2MSP.admin', 'Org2MSP.peer', 'Org2MSP.client')"
+  #     Writers:
+  #       Type: Signature
+  #       Rule: "OR('Org2MSP.admin', 'Org2MSP.client')"
+  #     Admins:
+  #       Type: Signature
+  #       Rule: "OR('Org2MSP.admin')"
+  #     Endorsement:
+  #       Type: Signature
+  #       Rule: "OR('Org2MSP.peer')"
 ################################################################################
 #
 #   SECTION: Capabilities
@@ -264,16 +268,16 @@ Profiles:
       OrdererType: etcdraft
       EtcdRaft:
         Consenters:
-          - Host: orderer.example.com
+          - Host: fabric-orderer.railway.internal
             Port: 7050
-            ClientTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
-            ServerTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
+            #ADJUST FOR OWN CERT FILE
+            ClientTLSCert: /app/data/fabric-ca-client/ord1/tls/tlscacerts/tls-github-fabric-ca-railway-internal-7054.pem
+            ServerTLSCert: /app/data/fabric-ca-server/tls-cert.pem
       Organizations:
-        - *OrdererOrg
+        - *Ord1
       Capabilities: *OrdererCapabilities
     Application:
       <<: *ApplicationDefaults
       Organizations:
-        - *Org1
-        - *Org2
+        - *upmoPeer1
       Capabilities: *ApplicationCapabilities
