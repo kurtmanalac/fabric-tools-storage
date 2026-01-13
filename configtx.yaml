@@ -41,7 +41,7 @@ Organizations:
         Rule: "OR('Ord1.peer')"
     OrdererEndpoints:
       - fabric-orderer.railway.internal:7050
-      - fabric-peer.railway.internal:7051
+      # - fabric-peer.railway.internal:7051
   - &upmoPeer1
     # DefaultOrg defines the organization which is used in the sampleconfig
     # of the fabric.git development environment
