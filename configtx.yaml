@@ -42,21 +42,6 @@ Organizations:
     OrdererEndpoints:
       - fabric-orderer.railway.internal:7050
       # - fabric-peer.railway.internal:7051
-    MSPConfig:
-      NodeOUs:
-        Enable: true
-        ClientOUIdentifier:
-          Certificate: cacerts/ca-cert.pem
-          OrganizationalUnitIdentifier: client
-        PeerOUIdentifier:
-          Certificate: cacerts/ca-cert.pem
-          OrganizationalUnitIdentifier: peer
-        AdminOUIdentifier:
-          Certificate: cacerts/ca-cert.pem
-          OrganizationalUnitIdentifier: admin
-        OrdererOUIdentifier:
-          Certificate: cacerts/ca-cert.pem
-          OrganizationalUnitIdentifier: orderer
   - &upmoPeer1
     # DefaultOrg defines the organization which is used in the sampleconfig
     # of the fabric.git development environment
@@ -80,21 +65,6 @@ Organizations:
       Endorsement:
         Type: Signature
         Rule: "OR('upmoPeer1.peer')"
-    MSPConfig:
-      NodeOUs:
-        Enable: true
-        ClientOUIdentifier:
-          Certificate: cacerts/ca-cert.pem
-          OrganizationalUnitIdentifier: client
-        PeerOUIdentifier:
-          Certificate: cacerts/ca-cert.pem
-          OrganizationalUnitIdentifier: peer
-        AdminOUIdentifier:
-          Certificate: cacerts/ca-cert.pem
-          OrganizationalUnitIdentifier: admin
-        OrdererOUIdentifier:
-          Certificate: cacerts/ca-cert.pem
-          OrganizationalUnitIdentifier: orderer
   # - &Org2
   #   # DefaultOrg defines the organization which is used in the sampleconfig
   #   # of the fabric.git development environment
