@@ -13,6 +13,8 @@ COPY install-files.sh /app/install-files.sh
 RUN chmod +x /app/install-files.sh
 COPY configtx.yaml /app/configtx.yaml
 RUN chmod +x /app/configtx.yaml
+COPY asset_contract.tgz /app/asset_contract.tgz
+RUN chmod +x /app/configtx.yaml
 WORKDIR /app
 
 CMD [ "/app/install-files.sh" ]
