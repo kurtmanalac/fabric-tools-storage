@@ -29,16 +29,13 @@ Organizations:
     Policies:
       Readers:
         Type: Signature
-        Rule: "OR('Ord1.client', 'Ord1.admin', 'Ord1.peer')"
+        Rule: "OR('Ord1.member')"
       Writers:
         Type: Signature
-        Rule: "OR('Ord1.client', 'Ord1.admin')"
+        Rule: "OR('Ord1.member')"
       Admins:
         Type: Signature
         Rule: "OR('Ord1.admin')"
-      Endorsement:
-        Type: Signature
-        Rule: "OR('Ord1.peer')"
     OrdererEndpoints:
       - fabric-orderer.railway.internal:7050
       # - fabric-peer.railway.internal:7051
